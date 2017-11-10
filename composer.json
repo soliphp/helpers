@@ -1,0 +1,37 @@
+{
+    "name": "soliphp/helpers",
+    "description": "Soli PHP helpers.",
+    "type": "library",
+    "keywords": ["helpers", "soliphp", "soli"],
+    "homepage": "https://github.com/soliphp/helpers",
+    "support": {
+        "issues": "https://github.com/soliphp/helpers/issues",
+        "source": "https://github.com/soliphp/helpers"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ueaner",
+            "email": "ueaner@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpunit/phpunit": "^5.7|^6.0"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Soli\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
