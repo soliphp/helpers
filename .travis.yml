@@ -34,7 +34,7 @@ before_script:
   - composer require --dev $COMPOSER_ARGS $DEPS
 
 script:
-  - php vendor/bin/phpunit --bootstrap=vendor/autoload.php
+  - php vendor/bin/phpunit
   - if [[ "$ANALYSIS" == "true" ]]; then php vendor/bin/phpcs ; fi
 
 after_script:
