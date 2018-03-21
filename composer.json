@@ -28,6 +28,5 @@
         "psr-4": {
             "Soli\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
