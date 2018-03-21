@@ -4,11 +4,11 @@ if (!function_exists('camelize')) { // @codeCoverageIgnore
     /**
      * Converts strings to camelize style
      *
-     * <code>
+     *<code>
      * echo camelize('coco_bongo'); // CocoBongo
      * echo camelize('co_co-bon_go', '-'); // Co_coBon_go
      * echo camelize('co_co-bon_go', '_-'); // CoCoBonGo
-     * </code>
+     *</code>
      *
      * @param string $str
      * @param string $delimiter
@@ -26,10 +26,10 @@ if (!function_exists('uncamelize')) { // @codeCoverageIgnore
     /**
      * Uncamelize strings which are camelized
      *
-     * <code>
+     *<code>
      * echo uncamelize('CocoBongo'); // coco_bongo
      * echo uncamelize('CocoBongo', '-'); // coco-bongo
-     * </code>
+     *</code>
      *
      * @param string $str
      * @param string $delimiter
@@ -50,9 +50,9 @@ if (!function_exists('lower')) { // @codeCoverageIgnore
     /**
      * Convert the given string to lower-case.
      *
-     * <code>
+     *<code>
      * echo lower('HELLO'); // hello
-     * </code>
+     *</code>
      *
      * @param string $str
      * @return string
@@ -67,9 +67,9 @@ if (!function_exists('upper')) { // @codeCoverageIgnore
     /**
      * Convert the given string to upper-case.
      *
-     * <code>
+     *<code>
      * echo upper('hello'); // HELLO
-     * </code>
+     *</code>
      *
      * @param string $str
      * @return string
@@ -84,10 +84,10 @@ if (!function_exists('starts_with')) { // @codeCoverageIgnore
     /**
      * Check if a string starts with a given string
      *
-     * <code>
+     *<code>
      * echo starts_with('Hello', 'He'); // true
      * echo starts_with('Hello', 'he'); // false
-     * </code>
+     *</code>
      *
      * @param string $haystack
      * @param string $needle
@@ -103,10 +103,10 @@ if (!function_exists('ends_with')) { // @codeCoverageIgnore
     /**
      * Check if a string ends with a given string
      *
-     * <code>
+     *<code>
      * echo ends_with('Hello', 'llo'); // true
      * echo ends_with('Hello', 'LLO'); // false
-     * </code>
+     *</code>
      *
      * @param string $haystack
      * @param string $needle
@@ -122,12 +122,12 @@ if (!function_exists('contains')) { // @codeCoverageIgnore
     /**
      * Determine if a given string contains a given substring.
      *
-     * <code>
+     *<code>
      * echo contains('Hello', 'ell'); // true
      * echo contains('Hello', 'hll'); // false
      * echo contains('Hello', ['hll', 'ell']); // true
      * echo contains('Hello', ['hll', '']); // false
-     * </code>
+     *</code>
      *
      * @param string $haystack
      * @param string|array $needles
@@ -149,10 +149,10 @@ if (!function_exists('is_json')) { // @codeCoverageIgnore
     /**
      * Check if a string is JSON
      *
-     * <code>
+     *<code>
      * echo is_json('{"data":123}'); // true
      * echo is_json('{data:123}'); // false
-     * </code>
+     *</code>
      *
      * @param string $str
      * @return bool
@@ -164,5 +164,25 @@ if (!function_exists('is_json')) { // @codeCoverageIgnore
             return (json_last_error() == JSON_ERROR_NONE);
         }
         return false;
+    }
+}
+
+if (!function_exists('mkdir_p')) { // @codeCoverageIgnore
+    /**
+     * Creates a directory and all its parent directories.
+     *
+     *<code>
+     * mkdir_p('/path/a/b/c');
+     * mkdir_p('/path/a/b/c', 0777);
+     *</code>
+     *
+     * @param string $path
+     * @param int $mode
+     * @return bool
+     * @codeCoverageIgnore
+     */
+    function mkdir_p($path, $mode = 0755)
+    {
+        return (is_dir($path) or mkdir($path, $mode, true));
     }
 }
