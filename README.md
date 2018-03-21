@@ -3,6 +3,22 @@ Soli helpers
 
 常用的 PHP「辅助」函数。
 
+Table of Contents
+=================
+
+* [字符串](#字符串)
+    * [camelize](#camelize)
+    * [uncamelize](#uncamelize)
+    * [lower](#lower)
+    * [upper](#upper)
+    * [starts_with](#starts_with)
+    * [ends_with](#ends_with)
+    * [contains](#contains)
+* [JSON](#json)
+    * [is_json](#is_json)
+* [文件目录](#文件目录)
+    * [mkdir_p](#mkdir_p)
+
 ## 字符串
 
 ### camelize
@@ -61,3 +77,12 @@ Soli helpers
 
      echo is_json('{"data":123}'); // true
      echo is_json('{data:123}'); // false
+
+## 文件目录
+
+### mkdir_p
+
+`mkdir_p` 创建所有需要创建的父级目录：
+
+     mkdir_p('/path/a/b/c');
+     mkdir_p('/path/a/b/c', 0777);
