@@ -3,6 +3,10 @@ Soli helpers
 
 常用的 PHP「辅助」函数。
 
+[![Build Status](https://travis-ci.org/soliphp/helpers.svg?branch=master)](https://travis-ci.org/soliphp/helpers)
+[![Coverage Status](https://coveralls.io/repos/github/soliphp/helpers/badge.svg?branch=master)](https://coveralls.io/github/soliphp/helpers?branch=master)
+[![License](https://poser.pugx.org/soliphp/helpers/license)](https://packagist.org/packages/soliphp/helpers)
+
 Table of Contents
 =================
 
