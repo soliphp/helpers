@@ -55,4 +55,20 @@ class HelperTest extends TestCase
         $this->assertFalse(is_json('{data:123}'));
         $this->assertFalse(is_json(null));
     }
+
+    public function testEnv()
+    {
+        $this->assertEquals('localhost', env('SOLI_DATABASE_HOST', 'localhost'));
+
+        putenv("SOLI_DATABASE_HOST=192.168.56.102");
+        $this->assertEquals('192.168.56.102', env('SOLI_DATABASE_HOST'));
+    }
+
+    public function testEnvFile()
+    {
+        $this->assertEquals('.env', env_file());
+
+        putenv("APP_ENV=prod");
+        $this->assertEquals('.env.prod', env_file());
+    }
 }

@@ -186,3 +186,35 @@ if (!function_exists('mkdir_p')) { // @codeCoverageIgnore
         return (is_dir($path) or mkdir($path, $mode, true));
     }
 }
+
+if (!function_exists('env')) { // @codeCoverageIgnore
+    /**
+     * Gets the value of an environment variable.
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    function env($key, $default = null)
+    {
+        $value = getenv($key);
+
+        return $value === false ? $default : $value;
+    }
+}
+
+if (!function_exists('env_file')) { // @codeCoverageIgnore
+    /**
+     * Get environment file.
+     *
+     * @param string $envFile
+     * @return string
+     */
+    function env_file($envFile = '.env')
+    {
+        if (getenv('APP_ENV')) {
+            return $envFile . '.' . getenv('APP_ENV');
+        }
+        return $envFile;
+    }
+}

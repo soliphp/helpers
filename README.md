@@ -22,6 +22,9 @@ Table of Contents
     * [is_json](#is_json)
 * [文件目录](#文件目录)
     * [mkdir_p](#mkdir_p)
+* [环境变量](#环境变量)
+    * [env](#env)
+    * [env_file](#env_file)
 
 ## 字符串
 
@@ -90,3 +93,44 @@ Table of Contents
 
     mkdir_p('/path/a/b/c');
     mkdir_p('/path/a/b/c', 0777);
+
+## 环境变量
+
+### env
+
+`env` 获取环境变量，允许指定默认值：
+
+    // 当没有 MYSQL_HOST 这个环境变量时，返回默认的 localhost
+    env('MYSQL_HOST', 'localhost');
+
+### env_file
+
+`env_file` 获取环境配置文件名，默认为 `.env`，如果定义了 `APP_ENV`
+环境变量，则返回对应的环境文件名。
+
+如，创建 test.php，文件内容为：
+
+    <?php
+    include __DIR__ . "/src/helpers.php";
+    echo env_file();
+
+默认执行 `php test.php`，将输出 `.env`：
+
+    php test.php
+    // 输出
+    .env
+
+如果执行 `APP_ENV=prod php test.php`，从命令行指定环境变量 `APP_ENV=prod` 将输出 `.env.prod`：
+
+    APP_ENV=prod php test.php
+    // 输出
+    .env.prod
+
+可配合 [phpdotenv] 加载对应环境配置文件的内容，假如环境配置文件放在项目根目录
+BASE_PATH 下：
+
+    (new Dotenv(BASE_PATH, env_file()))->load();
+
+加载后便可以使用 `env` 方法获取每一个环境变量的值，便于分离环境配置和项目代码。
+
+[phpdotenv]: https://github.com/vlucas/phpdotenv
