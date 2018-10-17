@@ -58,10 +58,37 @@ class HelperTest extends TestCase
 
     public function testEnv()
     {
-        $this->assertEquals('localhost', env('SOLI_DATABASE_HOST', 'localhost'));
+        $this->assertEquals(null, env('NOT_EXISTS_ENV_KEY'));
+        $this->assertEquals('default value', env('NOT_EXISTS_ENV_KEY', 'default value'));
 
-        putenv("SOLI_DATABASE_HOST=192.168.56.102");
-        $this->assertEquals('192.168.56.102', env('SOLI_DATABASE_HOST'));
+        putenv('ENV_HELLO_WORLD=true');
+        $this->assertEquals(true, env('ENV_HELLO_WORLD'));
+        putenv('ENV_HELLO_WORLD=(true)');
+        $this->assertEquals(true, env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD=false');
+        $this->assertEquals(false, env('ENV_HELLO_WORLD'));
+        putenv('ENV_HELLO_WORLD=(false)');
+        $this->assertEquals(false, env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD=empty');
+        $this->assertEquals('', env('ENV_HELLO_WORLD'));
+        putenv('ENV_HELLO_WORLD=(empty)');
+        $this->assertEquals('', env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD=null');
+        $this->assertEquals(null, env('ENV_HELLO_WORLD'));
+        putenv('ENV_HELLO_WORLD=(null)');
+        $this->assertEquals(null, env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD="hello"');
+        $this->assertEquals('hello', env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD=hello');
+        $this->assertEquals('hello', env('ENV_HELLO_WORLD'));
+
+        putenv('ENV_HELLO_WORLD');
+        $this->assertEquals(null, env('ENV_HELLO_WORLD'));
     }
 
     public function testEnvFile()

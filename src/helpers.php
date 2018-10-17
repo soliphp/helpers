@@ -191,6 +191,8 @@ if (!function_exists('env')) { // @codeCoverageIgnore
     /**
      * Gets the value of an environment variable.
      *
+     * @see https://github.com/laravel/framework/blob/master/src/Illuminate/Support/helpers.php env function
+     *
      * @param string $key
      * @param mixed $default
      * @return mixed
@@ -199,7 +201,30 @@ if (!function_exists('env')) { // @codeCoverageIgnore
     {
         $value = getenv($key);
 
-        return $value === false ? $default : $value;
+        if ($value === false) {
+            return $default;
+        }
+
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+
+        if (($valueLength = strlen($value)) > 1 && $value[0] === '"' && $value[$valueLength - 1] === '"') {
+            return substr($value, 1, -1);
+        }
+
+        return $value;
     }
 }
 
