@@ -18,6 +18,7 @@ Table of Contents
     * [starts_with](#starts_with)
     * [ends_with](#ends_with)
     * [contains](#contains)
+    * [sanitize](#sanitize)
 * [JSON](#json)
     * [is_json](#is_json)
 * [文件目录](#文件目录)
@@ -77,6 +78,33 @@ Table of Contents
     echo contains('Hello', 'hll'); // false
     echo contains('Hello', ['hll', 'ell']); // true
     echo contains('Hello', ['hll', '']); // false
+
+### sanitize
+
+`sanitize` 使用对应过滤标识进行数据清洗，如：
+
+    echo sanitize('!100a019.01a', 'int'); // 10001901
+    echo sanitize('{"data":123}', 'string'); // {&#34;data&#34;:123}
+    echo sanitize('some(one)@exa\\mple.com', 'email'); // someone@example.com
+
+可用的过滤标识有：
+
+ 标识         | 描述
+ -------------|--------------------------------------------------------
+ int          | 整数
+ absint       | 绝对值
+ float        | 小数
+ alnum        | 字母和数字
+ alpha        | 字母
+ email        | 邮箱
+ url          | URL
+ trim         | 同 trim()
+ string       | 字符串
+ strip_tags   | 同 strip_tags()
+ special      | 将特殊字符转换为 HTML Entity Name：如 `<` 转为 `&#60;`
+ special_full | 将特殊字符转换为 HTML Entity Number：如 `<` 转为 `&lt;`
+ lower        | 转为小写
+ upper        | 转为大写
 
 ## JSON
 

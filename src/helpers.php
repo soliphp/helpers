@@ -245,3 +245,69 @@ if (!function_exists('env_file')) { // @codeCoverageIgnore
         return $envFile;
     }
 }
+
+if (!function_exists('sanitize')) { // @codeCoverageIgnore
+    /**
+     * 使用对应过滤标识进行过滤
+     *
+     *<code>
+     * echo sanitize('!100a019.01a', 'int'); // 10001901
+     * echo sanitize('{"data":123}', 'string'); // {&#34;data&#34;:123}
+     * echo sanitize('some(one)@exa\\mple.com', 'email'); // someone@example.com
+     *</code>
+     *
+     * @param mixed $value
+     * @param string $filter
+     * @return mixed
+     * @throws \InvalidArgumentException
+     */
+    function sanitize($value, $filter)
+    {
+        switch ($filter) {
+            case 'int':
+                return intval(filter_var($value, FILTER_SANITIZE_NUMBER_INT));
+
+            case 'absint':
+                return abs(intval(filter_var($value, FILTER_SANITIZE_NUMBER_INT)));
+
+            case 'float':
+                return doubleval(filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_FRACTION]));
+
+            case 'alnum':
+                return preg_replace('/[^A-Za-z0-9]/', '', $value);
+
+            case 'alpha':
+                return preg_replace('/[^A-Za-z]/', '', $value);
+
+            case 'email':
+                return filter_var($value, FILTER_SANITIZE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
+
+            case 'url':
+                return filter_var($value, FILTER_SANITIZE_URL);
+
+            case 'trim':
+                return trim($value);
+
+            case 'string':
+                return filter_var($value, FILTER_SANITIZE_STRING);
+
+            case 'strip_tags':
+                return strip_tags($value);
+
+            case 'special':
+                return filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
+
+            case 'special_full':
+                return filter_var($value, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            case 'lower':
+                return mb_strtolower($value, 'UTF-8');
+
+            case 'upper':
+                return mb_strtoupper($value, 'UTF-8');
+
+            default:
+                throw new \InvalidArgumentException("Sanitize filter $filter is not supported");
+        }
+    }
+}

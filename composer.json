@@ -17,7 +17,9 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-json": "*",
+        "ext-ctype": "*"
     },
     "autoload": {
         "files": [
@@ -28,5 +30,12 @@
         "psr-4": {
             "Soli\\Tests\\": "tests/"
         }
-    }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.2-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
