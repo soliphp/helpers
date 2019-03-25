@@ -271,7 +271,9 @@ if (!function_exists('sanitize')) { // @codeCoverageIgnore
                 return abs(intval(filter_var($value, FILTER_SANITIZE_NUMBER_INT)));
 
             case 'float':
-                return doubleval(filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_FRACTION]));
+                return doubleval(
+                    filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, ['flags' => FILTER_FLAG_ALLOW_FRACTION])
+                );
 
             case 'alnum':
                 return preg_replace('/[^A-Za-z0-9]/', '', $value);
@@ -280,7 +282,10 @@ if (!function_exists('sanitize')) { // @codeCoverageIgnore
                 return preg_replace('/[^A-Za-z]/', '', $value);
 
             case 'email':
-                return filter_var($value, FILTER_SANITIZE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
+                if (defined('FILTER_FLAG_EMAIL_UNICODE')) {
+                    return filter_var($value, FILTER_SANITIZE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
+                }
+                return filter_var($value, FILTER_SANITIZE_EMAIL); // @codeCoverageIgnore
 
             case 'url':
                 return filter_var($value, FILTER_SANITIZE_URL);
