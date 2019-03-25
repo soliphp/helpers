@@ -53,6 +53,7 @@ class HelperTest extends TestCase
     {
         $this->assertTrue(is_json('{"data":123}'));
         $this->assertFalse(is_json('{data:123}'));
+        $this->assertFalse(is_json(''));
         $this->assertFalse(is_json(null));
     }
 

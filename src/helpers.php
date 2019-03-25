@@ -159,11 +159,13 @@ if (!function_exists('is_json')) { // @codeCoverageIgnore
      */
     function is_json($str)
     {
-        if (is_string($str)) {
-            json_decode($str);
-            return (json_last_error() == JSON_ERROR_NONE);
+        if (!is_string($str) || '' === $str) {
+            return false;
         }
-        return false;
+
+        json_decode($str);
+
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 }
 
